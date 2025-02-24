@@ -3,5 +3,23 @@
     "@supabase/supabase-js": "^2.48.1",
     "express": "^4.21.2",
     "node": "^18.20.7"
-  }
+  },
+  "name": "assignment-1-comp-4513-w2025",
+  "version": "1.0.0",
+  "description": "**Please view `COMP4513 Assignment 1.pdf` for instructions**",
+  "main": "art-api.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnguy407/Assignment-1-COMP-4513-W2025.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hnguy407/Assignment-1-COMP-4513-W2025/issues"
+  },
+  "homepage": "https://github.com/hnguy407/Assignment-1-COMP-4513-W2025#readme"
 }
