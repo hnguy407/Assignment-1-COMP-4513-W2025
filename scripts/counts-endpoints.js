@@ -14,11 +14,11 @@ create or replace function group_genres() returns table (genreName text, number_
   FROM "painting-genres"
   INNER JOIN genres ON genres."genreId" = "painting-genres"."genreId" 
   GROUP BY genres."genreId" 
-  ORDER BY num_of_paintings DESC
+  ORDER BY num_of_paintings ASC
 $$ language sql
 */
     //returns genre name and number of paints for each genre
-    // ordered by number of paintings, descending
+    // ordered by number of paintings, ascending
     app.get('/api/counts/genres', async (req, resp) =>{
         const {data, error} = await supabase.rpc('group_genres')
         resp.send(data)
@@ -53,7 +53,7 @@ $$ language sql;
         const {data, error} = await supabase.rpc('group_genres')
         const matches = data.filter(obj => obj.number_of_paintings > req.params.min_count)
         if (matches.length > 0){
-            resp.send(matches)
+            resp.send(matches.reverse())
         }
         else{
             resp.send(jsonMessage(`No genres were found that have at least ${req.params.min_count} paintings`))
