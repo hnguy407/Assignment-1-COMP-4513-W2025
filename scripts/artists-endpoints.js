@@ -9,7 +9,9 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data);
+        else{
+            resp.send(data);
+        }
     })
 
     //returns a single artist from provided artistId
@@ -22,11 +24,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`Could not find artist with artistId: ${req.params.artistid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
     
@@ -39,11 +41,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if (data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No artists found whose last name begins with ${req.params.substring}`))
+        }
+        else {
+            resp.send(data);
         }
     })
     
@@ -56,11 +58,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if (data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No artists found whose nationality begins with ${req.params.substring}`))
+        }
+        else {
+            resp.send(data);
         }
     })
 }

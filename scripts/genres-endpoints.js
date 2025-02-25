@@ -12,7 +12,9 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data);
+        else{
+            resp.send(data);
+        }
     })
 
     //return a single genre from provided genreId
@@ -25,11 +27,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data){
-            resp.send(data);
+        else if (!data){
+            resp.send(jsonMessage(`Could not find a genre with genreId: ${req.params.genresid}`));
         }
         else{
-            resp.send(jsonMessage(`Could not find a genre with genreId: ${req.params.genresid}`));
+            resp.send(data);
         }
     })
 
@@ -46,11 +48,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No genres were found from the provided paintingId: ${req.params.paintingid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
 

@@ -10,7 +10,9 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data);
+        else{
+            resp.send(data);
+        }
     })
     
     
@@ -24,11 +26,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data){
-            resp.send(data);
-        }
-        else{
+        else if(!data){
             resp.send(jsonMessage(`Could not find gallery with galleryId: ${req.params.galleryid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
     
@@ -41,11 +43,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if (data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No galleries found from country that starts with ${req.params.substring}`))
+        }
+        else {
+            resp.send(data);
         }
     })
 

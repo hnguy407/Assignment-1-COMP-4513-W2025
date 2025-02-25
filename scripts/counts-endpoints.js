@@ -24,7 +24,9 @@ $$ language sql
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data)
+        else{
+            resp.send(data)
+        }
     })
 
 
@@ -47,7 +49,9 @@ $$ language sql;
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data)
+        else{
+            resp.send(data)
+        }
     })
 
 
@@ -59,13 +63,14 @@ $$ language sql;
         const {data, error} = await supabase.rpc('group_genres')
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
-        }
-        const matches = data.filter(obj => obj.number_of_paintings > req.params.min_count)
-        if (matches.length > 0){
-            resp.send(matches.reverse())
-        }
-        else{
-            resp.send(jsonMessage(`No genres were found that have at least ${req.params.min_count} paintings`))
+        }else{
+            const matches = data.filter(obj => obj.number_of_paintings > req.params.min_count)
+            if (matches.length > 0){
+                resp.send(matches.reverse())
+            }
+            else{
+                resp.send(jsonMessage(`No genres were found that have at least ${req.params.min_count} paintings`))
+            }
         }
     })
 

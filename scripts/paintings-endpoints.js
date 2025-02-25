@@ -20,7 +20,9 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data);
+        else{
+            resp.send(data);
+        }
     })
     
     //return all paintings sorted by year
@@ -35,7 +37,9 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        resp.send(data);
+        else{
+            resp.send(data);
+        }
     })
 
     //return a single painting from provided paintingId
@@ -48,11 +52,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data){
-            resp.send(data);
-        }
-        else{
+        else if(!data){
             resp.send(jsonMessage(`Could not find a painting with paintingId: ${req.params.paintingid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
 
@@ -66,11 +70,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if (data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No paintings found whose title contains ${req.params.substring}`))
+        }
+        else {
+            resp.send(data);
         }
     })
 
@@ -85,11 +89,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if (data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No paintings found produced between the years ${req.params.start_year}-${req.params.end_year}`))
+        }
+        else {
+            resp.send(data);
         }
     })
 
@@ -103,11 +107,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No paintings were found in the given galleryId: ${req.params.galleryid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
 
@@ -121,11 +125,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(!data){
             resp.send(jsonMessage(`No paintings were found from the given artistId: ${req.params.artistid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
 
@@ -139,11 +143,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if (data.length > 0){
-            resp.send(data);
+        else if(data.length === 0){
+            resp.send(jsonMessage(`No paintings found with artists whose nationality starts with ${req.params.substring}`));
         }
-        else{
-            resp.send(jsonMessage(`No paintings found with artists whose nationality starts with ${req.params.substring}`))
+        else {
+            resp.send(data);
         }
     })
 
@@ -160,11 +164,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No paintings were found from the provided genreId: ${req.params.genreid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
 
@@ -179,11 +183,11 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        if(data.length > 0){
-            resp.send(data);
-        }
-        else{
+        else if(data.length === 0){
             resp.send(jsonMessage(`No paintings were found from the provided eraId: ${req.params.eraid}`));
+        }
+        else {
+            resp.send(data);
         }
     })
 
