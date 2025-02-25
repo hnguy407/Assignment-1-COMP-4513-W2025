@@ -21,6 +21,9 @@ $$ language sql
     // ordered by number of paintings, ascending
     app.get('/api/counts/genres', async (req, resp) =>{
         const {data, error} = await supabase.rpc('group_genres')
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data)
     })
 
@@ -41,6 +44,9 @@ $$ language sql;
     // ordered by number of paintings, descending
     app.get('/api/counts/artists', async (req, resp) =>{
         const {data, error} = await supabase.rpc('group_artists')
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data)
     })
 
@@ -51,6 +57,9 @@ $$ language sql;
     // also filters removes entries below minimum count.
     app.get('/api/counts/topgenres/:min_count', async (req, resp) =>{
         const {data, error} = await supabase.rpc('group_genres')
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         const matches = data.filter(obj => obj.number_of_paintings > req.params.min_count)
         if (matches.length > 0){
             resp.send(matches.reverse())

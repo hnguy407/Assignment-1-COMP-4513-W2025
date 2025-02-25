@@ -6,6 +6,9 @@ const init = (app, supabase) => {
         const {data, error} = await supabase
             .from('artists')
             .select()
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data);
     })
 
@@ -16,6 +19,9 @@ const init = (app, supabase) => {
             .select()
             .eq('artistId', req.params.artistid)
             .maybeSingle()
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data){
             resp.send(data);
         }
@@ -30,6 +36,9 @@ const init = (app, supabase) => {
             .from('artists')
             .select()
             .ilike('lastName', req.params.substring + '%')
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if (data.length > 0){
             resp.send(data);
         }
@@ -44,6 +53,9 @@ const init = (app, supabase) => {
             .from('artists')
             .select()
             .ilike('nationality', req.params.substring + '%')
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if (data.length > 0){
             resp.send(data);
         }

@@ -7,6 +7,9 @@ const init = (app, supabase) => {
         const {data, error} = await supabase
             .from('galleries')
             .select();
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data);
     })
     
@@ -18,6 +21,9 @@ const init = (app, supabase) => {
             .select()
             .eq('galleryId', req.params.galleryid)
             .maybeSingle()
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data){
             resp.send(data);
         }
@@ -32,6 +38,9 @@ const init = (app, supabase) => {
             .from('galleries')
             .select()
             .ilike('galleryCountry', req.params.substring + '%')
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if (data.length > 0){
             resp.send(data);
         }

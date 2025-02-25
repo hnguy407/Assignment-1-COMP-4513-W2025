@@ -6,6 +6,8 @@ const query =
     googleDescription, wikiLink, jsonAnnotations, 
     artists!inner(*), galleries!inner(*)`
     // no artistId, no galleryId, instead all fields in artists and galleries table.
+    // assignment description is slightly ambigious whether i can include
+    // foreign keys in the painting response.
 
 
 const init = (app, supabase) => {
@@ -15,6 +17,9 @@ const init = (app, supabase) => {
             .from('paintings')
             .select(query)
             .order('title', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data);
     })
     
@@ -27,6 +32,9 @@ const init = (app, supabase) => {
             .from('paintings')
             .select(query)
             .order('yearOfWork', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data);
     })
 
@@ -37,6 +45,9 @@ const init = (app, supabase) => {
             .select(query)
             .eq('paintingId', req.params.paintingid)
             .maybeSingle()
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data){
             resp.send(data);
         }
@@ -52,6 +63,9 @@ const init = (app, supabase) => {
             .select(query)
             .ilike('title', "%" + req.params.substring + '%')
             .order('title', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if (data.length > 0){
             resp.send(data);
         }
@@ -68,6 +82,9 @@ const init = (app, supabase) => {
             .gte('yearOfWork',req.params.start_year)
             .lte('yearOfWork',req.params.end_year)
             .order('yearOfWork', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if (data.length > 0){
             resp.send(data);
         }
@@ -83,6 +100,9 @@ const init = (app, supabase) => {
             .select(query)
             .eq('galleryId', req.params.galleryid)
             .order('title', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data.length > 0){
             resp.send(data);
         }
@@ -98,6 +118,9 @@ const init = (app, supabase) => {
             .select(query)
             .eq('artistId', req.params.artistid)
             .order('title', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data.length > 0){
             resp.send(data);
         }
@@ -113,6 +136,9 @@ const init = (app, supabase) => {
             .select(query)
             .ilike('artists.nationality', req.params.substring + '%')
             .order('title', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if (data.length > 0){
             resp.send(data);
         }
@@ -131,6 +157,9 @@ const init = (app, supabase) => {
             .select(`paintings(paintingId, title, yearOfWork)`)
             .eq('genreId', req.params.genreid)
             .order('paintings(yearOfWork)', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data.length > 0){
             resp.send(data);
         }
@@ -147,6 +176,9 @@ const init = (app, supabase) => {
             .select(`paintings!inner(paintingId, title, yearOfWork), genres!inner()`)
             .eq('genres.eraId', req.params.eraid)
             .order('paintings(yearOfWork)', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data.length > 0){
             resp.send(data);
         }

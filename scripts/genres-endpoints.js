@@ -9,6 +9,9 @@ const init = (app, supabase) => {
         const {data, error} = await supabase
             .from('genres')
             .select(query);
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         resp.send(data);
     })
 
@@ -19,6 +22,9 @@ const init = (app, supabase) => {
             .select(query)
             .eq('genreId', req.params.genresid)
             .maybeSingle()
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data){
             resp.send(data);
         }
@@ -37,6 +43,9 @@ const init = (app, supabase) => {
             // .select(`genres(${query})`)
             .eq('paintingId', req.params.paintingid)
             .order('genres(genreName)', {ascending: true})
+        if(error){
+            resp.send(jsonMessage('Something went wrong, please try something else'));
+        }
         if(data.length > 0){
             resp.send(data);
         }
