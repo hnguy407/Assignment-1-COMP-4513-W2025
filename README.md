@@ -131,7 +131,7 @@ Here are the possible end points available by the API.
 - https://assignment-1-comp-4513-w2025-1.onrender.com/api/paintings/galleries/5
 - https://assignment-1-comp-4513-w2025-1.onrender.com/api/paintings/artist/16
 - https://assignment-1-comp-4513-w2025-1.onrender.com/api/paintings/artist/666
-- https://assignment-1-comp-4513-w2025-1.onrender.com/api/paintings/artist/country/ital
+- https://assignment-1-comp-4513-w2025-1.onrender.com/api/paintings/artists/country/ital
 <br/>
 
 - https://assignment-1-comp-4513-w2025-1.onrender.com/api/genres
