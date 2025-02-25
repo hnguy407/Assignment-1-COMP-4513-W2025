@@ -125,7 +125,7 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        else if(!data){
+        else if(data.length === 0){
             resp.send(jsonMessage(`No paintings were found from the given artistId: ${req.params.artistid}`));
         }
         else {
