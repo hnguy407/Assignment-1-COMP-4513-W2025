@@ -18,7 +18,7 @@ create or replace function group_genres() returns table (genreName text, number_
 $$ language sql
 */
     //returns genre name and number of paints for each genre
-    // ordered by number of paintings, ascending
+    // ordered by number of paintings, ascendings
     app.get('/api/counts/genres', async (req, resp) =>{
         const {data, error} = await supabase.rpc('group_genres')
         if(error){
