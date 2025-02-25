@@ -24,7 +24,7 @@ const init = (app, supabase) => {
         if(error){
             resp.send(jsonMessage('Something went wrong, please try something else'));
         }
-        else if(data.length === 0){
+        else if(!data){
             resp.send(jsonMessage(`Could not find artist with artistId: ${req.params.artistid}`));
         }
         else {
